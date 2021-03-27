@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.min.css">
+    <title>Test for GUK</title>
+</head>
+<body>
+    <template id="proditem-template">
+        <div class="product">
+            <div class="product_image_block">
+                <img class="product__img" :src="primaryImageUrl.slice(0,-4)+'_220x220_1.jpg'" :alt="primaryImageUrl">                    
+            </div>
+            <div class="main__content">
+                <span class="code__line">                 
+                    <span class="product_code">Код: {{code.slice(5)}}</span>
+                    <span class="product_status">Наличие</span>
+                </span>
+                <div class="descrandprice__line">
+                    <div class="product_descr_block">                        
+                        <div class="prodtitle_wrap">
+                            <p class="product_title">{{title}}</p>
+                        </div>
+                        <div class="associated_wrap">
+                            <p class="associated_block">
+                                <span class="associated_verb">Могут понадобиться: </span>
+                                <a href="#" class="url--link" v-for='(ass_item, idx) in assocProducts.split("\n")' :key='idx'>{{ass_item}} </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="product_price_block">
+                        <div class="prices" >
+                            <div class="card__price_wrap">                       
+                                <div class="price__article">
+                                    <span class="price__card">По карте клуба</span>
+                                </div>
+                                <span class="gold__price" v-if="priceSwitcher">{{goldPrice.toFixed(2)}}
+                                    <svg version="1.0" id="Слой_1" class="rouble" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                        width="18px" height="18px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+                                        <path :d="rouble_path"/>
+                                    </svg>
+                                </span>
+                                <span class="gold__price" v-else>{{goldPriceAlt.toFixed(2)}}
+                                    <svg version="1.0" id="Слой_1" class="rouble" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                        width="18px" height="18px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+                                        <path :d="rouble_path"/>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="price">
+                                <span v-if="priceSwitcher">{{price.toFixed(2)}}</span>
+                                <span v-else>{{priceAlt.toFixed(2)}}</span> 
+                                <svg version="1.0" id="Слой_1" class="grey_rouble" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    width="18px" height="18px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+                                    <path :d="rouble_path"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <div class="bonus__block">
+                            <span>Можно купить за 999,9 балла</span>
+                        </div>
+                        <div class="switch__price_wrap">
+                            <span class="switchPrice" @click="priceSwitcher=false;isactive=true" :class="[{active:isactive}]"><span class="switchPrice-inner">{{unitFull}}</span></span>
+                            <span class="switchPrice" @click="priceSwitcher=true;isactive=false" :class="[{active:!isactive}]"><span class="switchPrice-inner">{{unitAlt}}</span></span> 
+                        </div>
+                        <div class="package_notice">
+                            <div class="unit-i"></div>                          
+                            <span>Продается упаковками: <p>{{unitRatio}} {{unit}} = {{unitRatioAlt}} {{unitAlt}}</p></span>                                
+                        </div>
+                        <div class="add__block">
+                            <div class="input__block">
+                                <input type="number" inputmode="numeric" class="quantityBlock" v-model="count" @keyup="TypeNumInputMethod(count)" onkeydown = "javascript: return ((event.keyCode>46)&&(event.keyCode<58))"  >
+                                <div class="arrow_block">
+                                    <span class="arrow up" @click="IncreaseCountMethod"></span>
+                                    <span class="arrow down" @click="DecreaseCountMethod"></span>
+                                </div>                                    
+                            </div>
+                            <a class="addtocart" @click.prevent="AddToCartMethod" :data-product-id="id" href="#">                   
+                                <svg class="cart">
+                                    <path d="m14.571 16.381c.571 0 .952.381.952.952 0 .571-.381.952-.952.952-.571 0-.952-.381-.952-.952 
+                                    0-.571.476-.952.952-.952m0-.952c-1.048 0-1.905.857-1.905 1.905 0 1.048.857 1.905 1.905 1.905 1.048 
+                                    0 1.905-.857 1.905-1.905 0-1.048-.857-1.905-1.905-1.905"></path>
+                                    <path d="m7.905 16.381c.571 0 .952.381.952.952 0 .571-.381.952-.952.952-.571 0-.952-.381-.952-.952 
+                                    0-.571.476-.952.952-.952m0-.952c-1.048 0-1.905.857-1.905 1.905 0 1.048.857 1.905 1.905 1.905 1.048 
+                                    0 1.905-.857 1.905-1.905 0-1.048-.857-1.905-1.905-1.905"></path>
+                                    <path d="m16.476 14.476h-10.857l-.095-.381c0-.095-1.429-9.714-1.905-11.524-.381-1.524-3.333-1.429-3.333-1.429v-.952c.095 
+                                    0 3.714-.286 4.286 2.19.381 1.714 1.619 9.333 1.81 11.143h10.1v.952"></path>
+                                    <path d="m4.095 3.048h15.238v.952h-15.238z"></path>
+                                    <path d="m5.05 10.667h12.381v.952h-12.381z"></path>
+                                    <path d="m16.476 11.619h.952l1.905-8.571h-.952l-1.905 8.571"></path>
+                                </svg>
+                                <span>В корзину</span>                   
+                            </a>
+                        </div>
+                    </div>                        
+                </div>                    
+            </div>                  
+        </div>
+    </template>    
+     <template id='prodlist-template'>        
+        <div class="container">
+            <!-- Для всего массива продуктов иттерируем компонент продукт с передачей параметров -->
+            <!-- Слушаем событие addtocartevent и вешаем обработчик для "корзины" -->
+            <proditem v-for="(item, idx) in products" :key="idx"
+                @addtocartevent="AddtocartMethod"
+                :id=item.productId 
+                :title=item.title 
+                :price=item.priceRetail 
+                :price-alt=item.priceRetailAlt
+                :gold-price=item.priceGold 
+                :gold-price-alt=item.priceGoldAlt
+                :unit-full=item.unitFull            
+                :primary-image-url=item.primaryImageUrl
+                :code="item.code"
+                :assoc-products=item.assocProducts
+                :unit=item.unit
+                :unit-ratio=item.unitRatio
+                :unit-alt=item.unitAlt
+                :unit-ratio-alt=item.unitRatioAlt>
+            </proditem>
+        </div>    
+    </template>
+    <div id="app">
+        <!-- сюда vue монтирует код темплейтов, получая их в компоненте по id-->
+        <prodlist></prodlist>        
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>

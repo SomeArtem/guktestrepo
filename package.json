@@ -1,0 +1,49 @@
+{
+  "name": "guk-test-project",
+  "version": "1.0.0",
+  "description": "Hi, that's my decision of Test for guk-company. Here you can see an app, that bring data from local json-file and represent it as a list of product-elements. You can interact with it and get result into your browser's console. Used instruments: GULP, Vue.js, scss, babel, eslint. Use :prod argument in your terminal to compress output-files ",
+  "scripts": {
+    "serve": "gulp watch",
+    "build:dev": "gulp build",
+    "build:prod": "gulp build --prod"
+  },
+  "keywords": [
+    "gulp",
+    "babel",
+    "eslint",
+    "js"
+  ],
+  "author": "artem <serebryakov.artemiy@mail.ru>",
+  "license": "ISC",
+  "browser": {
+    "vue": "vue/dist/vue.common.js"
+  },
+  "browserslist": [
+    "> 0.1%",
+    "IE 11"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/register": "^7.13.8",
+    "babelify": "^10.0.0",
+    "browser-sync": "^2.26.14",
+    "browserify": "^17.0.0",
+    "del": "^6.0.0",
+    "eslint": "^7.22.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-file-include": "^2.3.0",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-if": "^3.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0",
+    "vue": "^2.6.12"
+  }
+}
