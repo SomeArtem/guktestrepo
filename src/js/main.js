@@ -1,24 +1,13 @@
-import prodlistComponent from './ListComponent'
-import Vue from 'vue'
+import prodlistComponent from "./ListComponent";
+import Vue from "vue";
 
-
-
-const app= new Vue({
-    el:'#app',
-    data:{        
-                        
-    },
-    computed:{        
-        
-    },
-    methods:{        
-        
-    },
-    created:function(){
-        
-    },
-    components:{
-        'prodlist': prodlistComponent
-    }
-})
-
+const app = new Vue({
+  el: "#app",
+  data: {},
+  computed: {},
+  methods: {},
+  created: function () {},
+  components: {
+    prodlist: prodlistComponent,
+  },
+});
