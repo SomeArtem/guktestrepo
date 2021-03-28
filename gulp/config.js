@@ -1,8 +1,8 @@
-const srcPath='src'
-const destPath='build'
+const srcPath = 'src';
+const destPath = 'build';
 
-const config={
-    src:{
+const config = {
+    src: {
         root:srcPath,
         sass:`${srcPath}/scss`,
         js:`${srcPath}/js`,
@@ -10,11 +10,10 @@ const config={
         images:`${srcPath}/assets/images`,
         iconsMono:`${srcPath}/assets/icons/mono`,
         iconsMulti:`${srcPath}/assets/icons/multi`,
-        data:`${srcPath}/assets/data`,      
-
+        data:`${srcPath}/assets/data`
     },
 
-    dest:{
+    dest: {
         root:destPath,
         html:destPath,
         css:`${destPath}/css`,
@@ -24,10 +23,10 @@ const config={
         data:`${destPath}/data`
     },
 
-    setEnv(){
-        this.isProd=process.argv.includes('--prod')
+    setEnv() {
+        this.isProd=process.argv.includes('--prod'),
         this.isDev=!this.isProd   
     }
-}
+};
 
-export default config
+export default config;
